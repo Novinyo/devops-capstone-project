@@ -98,10 +98,16 @@ def update_accounts(account_id):
 ######################################################################
 # DELETE AN ACCOUNT
 ######################################################################
+@app.route("/accounts/<int:account_id>", methods=["DELETE"])
+def delete_accounts(account_id):
+    """
+    Delete an existing acount
+    """
+    account = Account.find(account_id)
+    if account:
+        account.delete()
 
-# ... place you code here to DELETE an account ...
-
-
+    return "", status.HTTP_204_NO_CONTENT
 ######################################################################
 #  U T I L I T Y   F U N C T I O N S
 ######################################################################
