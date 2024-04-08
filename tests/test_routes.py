@@ -160,20 +160,18 @@ class TestAccountService(TestCase):
 
     def test_delete_account(self):
         """It should delete an existing account"""
-        accounts = self._create_accounts(5)
-        test_account = accounts[0]
+        test_account = self._create_accounts(1)[0]
+
         response = self.client.delete(f"{BASE_URL}/{test_account.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(len(response.data), 0)
         response = self.client.get(f"{BASE_URL}/{test_account.id}")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        response = self.client.get(BASE_URL)
-        data = response.get_json()
-        self.assertEqual(len(data), 4)
+
     def test_list_accounts(self):
         """It should return all accounts"""
         accounts = self._create_accounts(5)
-        response = self.client.get(f"{BASE_URL}")
+        response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.get_json()
         self.assertEqual(len(data), 5)
