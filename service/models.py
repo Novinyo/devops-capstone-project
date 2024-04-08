@@ -64,7 +64,7 @@ class PersistentBase:
         db.create_all()  # make our sqlalchemy tables
 
     @classmethod
-    def all(cls):
+    def all(cls) -> list:
         """Returns all of the records in the database"""
         logger.info("Processing all records")
         return cls.query.all()
@@ -135,7 +135,7 @@ class Account(db.Model, PersistentBase):
         return self
 
     @classmethod
-    def find_by_name(cls, name):
+    def find_by_name(cls, name) -> list:
         """Returns all Accounts with the given name
 
         Args:
