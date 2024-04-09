@@ -64,12 +64,11 @@ def create_accounts():
 def list_accounts():
     """
     List all accounts
-    This endpoint returns a list of all accounts in the database"""
+    This endpoint returns a list of all accounts in the database
+    """
     app.logger.info("Request to get all accounts")
     accounts = Account.all()
-
     results = [account.serialize() for account in accounts]
-
     return jsonify(results), status.HTTP_200_OK
 
 ######################################################################
