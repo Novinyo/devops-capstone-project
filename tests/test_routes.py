@@ -173,7 +173,7 @@ class TestAccountService(TestCase):
 
     def test_list_accounts(self):
         """It should return all accounts"""
-        accounts = self._create_accounts(5)
+        self._create_accounts(5)
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.get_json()
@@ -181,7 +181,7 @@ class TestAccountService(TestCase):
 
     def test_security_headers(self):
         """It should return security headers"""
-        response = self.client.get("/", environ_overrides = HTTPS_ENVIRON)
+        response = self.client.get("/", environ_overrides=HTTPS_ENVIRON)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         headers = {
             'X-Frame-Options': 'SAMEORIGIN',
@@ -194,6 +194,6 @@ class TestAccountService(TestCase):
 
     def test_cors_security(self):
         """It should check the access control allow origin"""
-        response = self.client.get("/", environ_overrides = HTTPS_ENVIRON)
+        response = self.client.get("/", environ_overrides=HTTPS_ENVIRON)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.headers.get("Access-Control-Allow-Origin"), "*")
